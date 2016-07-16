@@ -63,6 +63,7 @@ sudo chroot $TARGET_MNT apt-get install tcpdump
 #configure startup
 sudo cp rc.local ${TARGET_MNT}/etc/rc.local
 sudo cp -avr badusb-scripts/* ${TARGET_MNT}/home/usbarmory
+sudo mkdir ${TARGET_MNT}/home/usbarmory/SniffedFiles
 
 #finalize & pwd
 echo "-------------------------------"
