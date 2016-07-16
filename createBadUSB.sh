@@ -60,6 +60,9 @@ echo "Install sniff-applications"
 echo "-------------------------------"
 sudo chroot $TARGET_MNT apt-get install tcpdump
 
+#configure startup
+sudo cp rc.local ${TARGET_MNT}/etc/rc.local
+sudo cp -avr badusb-scripts/* ${TARGET_MNT}/home/usbarmory
 
 #finalize & pwd
 echo "-------------------------------"
