@@ -120,9 +120,8 @@ echo "-------------------------------"
 echo "building Kernel: Linux 4.6.1"
 echo "-------------------------------"
 
-cd linux-kernel-files
+cd linux-4.6.1
 export ARCH=arm
-wget https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.6.1.tar.xz
 tar xvf linux-4.6.1.tar.xz && cd linux-4.6.1
 
 make distclean
