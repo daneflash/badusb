@@ -54,7 +54,8 @@ sudo chroot $TARGET_MNT systemctl mask isc-dhcp-server.service
 sudo chroot $TARGET_MNT systemctl mask display-manager.service
 sudo chroot $TARGET_MNT systemctl mask hwclock-save.service
 
-sudo chroot $TARGET_MNT apt-get update
+sudo chroot $TARGET_MNT apt-get -y update
+sudo chroot $TARGET_MNT apt-get install -y ntp
 
 #configure startup
 sudo cp rc.local ${TARGET_MNT}/etc/rc.local
@@ -112,8 +113,8 @@ echo "-------------------------------"
 echo "Install sniff-applications"
 echo "-------------------------------"
 
-sudo chroot $TARGET_MNT apt-get install tcpdump
-sudo chroot $TARGET_MNT apt-get install mitmproxy
+sudo chroot $TARGET_MNT apt-get install -y tcpdump
+sudo chroot $TARGET_MNT apt-get install -y mitmproxy
 
 echo "---------------------------------------------------------------------"
 sudo rm ${TARGET_MNT}/usr/bin/qemu-arm-static
