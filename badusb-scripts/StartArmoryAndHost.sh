@@ -53,7 +53,7 @@ sleep 2
 #required password for host (hardcoded for masterthesis!)
 $p2p "sudo su\\n" $lang
 sleep $delay
-$p2p Wolfinger82!\\n $lang
+$p2p Enter-Password!\\n $lang
 sleep $delay
 
 $p2p "iptables -F\\n" $lang
