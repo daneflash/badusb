@@ -54,11 +54,7 @@ sudo chroot $TARGET_MNT systemctl mask isc-dhcp-server.service
 sudo chroot $TARGET_MNT systemctl mask display-manager.service
 sudo chroot $TARGET_MNT systemctl mask hwclock-save.service
 
-#install sniff-applications
-echo "-------------------------------"
-echo "Install sniff-applications"
-echo "-------------------------------"
-sudo chroot $TARGET_MNT apt-get install tcpdump
+sudo chroot $TARGET_MNT apt-get update
 
 #configure startup
 sudo cp rc.local ${TARGET_MNT}/etc/rc.local
@@ -110,6 +106,14 @@ sudo chroot $TARGET_MNT /usr/sbin/useradd -s /bin/bash -p `mkpasswd -m sha-512 u
 
 sudo cp -avr badusb-scripts/* ${TARGET_MNT}/home/usbarmory
 sudo mkdir ${TARGET_MNT}/home/usbarmory/SniffedFiles
+
+#install sniff-applications
+echo "-------------------------------"
+echo "Install sniff-applications"
+echo "-------------------------------"
+
+sudo chroot $TARGET_MNT apt-get install tcpdump
+sudo chroot $TARGET_MNT apt-get install mitmproxy
 
 echo "---------------------------------------------------------------------"
 sudo rm ${TARGET_MNT}/usr/bin/qemu-arm-static
