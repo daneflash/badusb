@@ -63,7 +63,6 @@ sudo chroot $TARGET_MNT apt-get install tcpdump
 #configure startup
 sudo cp rc.local ${TARGET_MNT}/etc/rc.local
 
-
 #finalize & pwd
 echo "-------------------------------"
 echo "finalize & pwd"
@@ -108,8 +107,6 @@ sudo losetup -d ${LOOPER_DEV}
 #create user (usbarmory:usbarmory)
 sudo chroot $TARGET_MNT /usr/sbin/useradd -s /bin/bash -p `mkpasswd -m sha-512 usbarmory` -m usbarmory
 
-sudo cp -avr badusb-scripts/* ${TARGET_MNT}/home/usbarmory
-sudo mkdir ${TARGET_MNT}/home/usbarmory/SniffedFiles
 
 echo "---------------------------------------------------------------------"
 sudo rm ${TARGET_MNT}/usr/bin/qemu-arm-static
