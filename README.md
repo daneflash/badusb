@@ -6,13 +6,13 @@
 ## Installation
 Start "createBadUSB.sh" to create a BadUSB-Image on SD-Card for USB Armory
 
-On this image open file /home/usbarmory/StartUsbArmoryAndHost.sh and edit the required root-password for the victims linux
+On this image open file /home/usbarmory/StartArmoryAndHost.sh and edit the required root-password for the victims linux
 
 ## Run
-After successfully installation just plug in USB Armory on a running Linux-System.
+After successful installation, just plug in USB Armory on a running Linux-System.
 
 ### Certificate
-There a two options for install the required certificate in browser.
+There a two options for install the required certificate in browser:
 
 #### Manual installation
 When USB-Armory is running, just open browser and go to http://mitm.it -> Others and accept the certificate
