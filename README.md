@@ -21,4 +21,4 @@ When USB-Armory is running, just open browser and go to http://mitm.it -> Others
 On image open file /home/usbarmory/Sniff.sh and edit the script (further information is in this script)
 
 ## License
-read the [LICENSE.txt](http://github.com/daneflash/badusb/blob/master/LICENSE.txt) file for details.
+This program is provided under an MIT open source license, read the [LICENSE.txt](http://github.com/daneflash/badusb/blob/master/LICENSE.txt) file for details.
