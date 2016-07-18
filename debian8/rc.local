@@ -20,4 +20,8 @@ if [ "$FILES" = "0" ]; then
   /usr/sbin/dpkg-reconfigure openssh-server
 fi
 
+/home/usbarmory/hidnet.sh || exit 1
+sleep 3
+/home/usbarmory/StartArmoryAndHost.sh || exit 1
+
 exit 0

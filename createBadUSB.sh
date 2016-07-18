@@ -57,9 +57,6 @@ sudo chroot $TARGET_MNT systemctl mask hwclock-save.service
 sudo chroot $TARGET_MNT apt-get -y update
 sudo chroot $TARGET_MNT apt-get install -y ntp
 
-#configure startup
-sudo cp rc.local ${TARGET_MNT}/etc/rc.local
-
 
 #finalize & pwd
 echo "-------------------------------"
