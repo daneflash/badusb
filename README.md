@@ -1,4 +1,4 @@
-# BadUSB - Intercept TCP Connections via USB Armory
+# BadUSB - Intercept TCP traffic via USB Armory
 
 ## Additional information
 !!! THIS CONTENT IS UNDER CONSTRUCTION AND NOT READY TO USE !!!
