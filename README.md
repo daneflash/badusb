@@ -1,5 +1,8 @@
 # BadUSB - Intercept TCP Connections via USB Armory
 
+## Additional information
+!!! THIS CONTENT IS UNDER CONSTRUCTION AND NOT READY TO USE !!!
+
 ## Installation
 Start "createBadUSB.sh" to create a BadUSB-Image on SD-Card for USB Armory
 
@@ -17,5 +20,5 @@ When USB-Armory is running, just open browser and go to http://mitm.it -> Others
 #### Automatic installation
 On image open file /home/usbarmory/Sniff.sh and edit the script (further information is in this script)
 
-## Additional information
-!!! THIS CONTENT IS UNDER CONSTRUCTION AND NOT READY TO USE !!!
+## License
+read the [LICENSE.txt](http://github.com/daneflash/badusb/master/LICENSE.txt) file for details.
