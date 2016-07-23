@@ -56,6 +56,8 @@ sudo chroot $TARGET_MNT systemctl mask hwclock-save.service
 
 sudo chroot $TARGET_MNT apt-get -y update
 sudo chroot $TARGET_MNT apt-get install -y ntp
+sudo chroot $TARGET_MNT apt-get install -y libssl-dev
+sudo chroot $TARGET_MNT apt-get install -y libevent-dev
 
 
 #finalize & pwd
@@ -104,6 +106,8 @@ sudo chroot $TARGET_MNT /usr/sbin/useradd -s /bin/bash -p `mkpasswd -m sha-512 u
 
 sudo cp -avr badusb-scripts/* ${TARGET_MNT}/home/usbarmory
 sudo mkdir ${TARGET_MNT}/home/usbarmory/SniffedFiles
+sudo mkdir ${TARGET_MNT}/home/usbarmory/SniffedFiles/sslsplit
+sudo mkdir ${TARGET_MNT}/home/usbarmory/SniffedFiles/sslsplit/logdir
 sudo mkdir ${TARGET_MNT}/home/usbarmory/certificate
 sudo cp -avr certificate/* ${TARGET_MNT}/home/usbarmory/certificate
 
