@@ -11,7 +11,7 @@ On this image open file /home/usbarmory/StartArmoryAndHost.sh and edit the requi
 SSLSplit is precompiled for USB-Armory and placed in badusb-scripts folder. There is a sslsplit-tar file for self-compiling.
 
 ## Run
-After successful installation, just plug in USB Armory on a running Linux-System.
+After successful installation, you can configure the BadUSB-Device in "Sniff.sh". The root-password of victim is needed in "StartArmoryAndHost.sh". After configuring just plug in USB Armory on a running Linux-System.
 
 ### Certificate for mitmproxy
 There a two options for install the required certificate in browser:
