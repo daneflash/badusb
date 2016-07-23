@@ -9,10 +9,12 @@ export delay=0.1
 
 #=========== CONFIGS ==================
 # Sniff-Prog:
+# 0 = no sniff
 # 1 = tcpdump
 # 2 = mitmproxy
+# 3 = sslsplit
 
-export sniffprog=2
+export sniffprog=0
 #--------------------------------------
 # Certificate:
 # 0 = install no certificate
@@ -39,6 +41,22 @@ elif [ "$sniffprog" -eq 2 ]; then
 
 	# Start mitmdump for HTTP/HTTPS
 	mitmdump -T --host -q -w /home/usbarmory/SniffedFiles/mitmdump-$FILECOUNT &
+elif [ "$sniffprog" -eq 3 ]; then
+	# most common ports	
+	sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
+	sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 8443
+	sudo iptables -t nat -A PREROUTING -p tcp --dport 587 -j REDIRECT --to-ports 8443
+	sudo iptables -t nat -A PREROUTING -p tcp --dport 465 -j REDIRECT --to-ports 8443
+	sudo iptables -t nat -A PREROUTING -p tcp --dport 993 -j REDIRECT --to-ports 8443
+	# additional ports
+	# WhatsApp:	
+	#sudo iptables -t nat -A PREROUTING -p tcp --dport 5222 -j REDIRECT --to-ports 8080
+
+	sleep 4
+
+	./sslsplit -D -l /home/usbarmory/SniffedFiles/sslsplit-$FILECOUNT.log -j /home/usbarmory/SniffedFiles/sslsplit/ -S logdir/ -k /home/usbarmory/certificate/ca-key.pem -c /home/usbarmory/certificate/ca-root.pem ssl 0.0.0.0 8443 tcp 0.0.0.0 8080 &
+elif [ "$sniffprog" -eq 0 ]; then
+	
 fi
 
 
