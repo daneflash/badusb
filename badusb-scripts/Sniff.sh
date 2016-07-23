@@ -12,7 +12,7 @@ export delay=0.1
 # 0 = no sniff
 # 1 = tcpdump
 # 2 = mitmproxy
-# 3 = sslsplit
+# 3 = sslsplit Not working automatic! (TODO: Fix problem with run as daemon in background!)
 
 export sniffprog=0
 #--------------------------------------
@@ -55,8 +55,6 @@ elif [ "$sniffprog" -eq 3 ]; then
 	sleep 4
 
 	./sslsplit -D -l /home/usbarmory/SniffedFiles/sslsplit-$FILECOUNT.log -j /home/usbarmory/SniffedFiles/sslsplit/ -S logdir/ -k /home/usbarmory/certificate/ca-key.pem -c /home/usbarmory/certificate/ca-root.pem ssl 0.0.0.0 8443 tcp 0.0.0.0 8080 &
-elif [ "$sniffprog" -eq 0 ]; then
-	
 fi
 
 
