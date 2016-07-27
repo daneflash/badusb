@@ -104,12 +104,12 @@ exec /sbin/getty -l 115200 ttyGS0 vt102
 #create user (usbarmory:usbarmory)
 sudo chroot $TARGET_MNT /usr/sbin/useradd -s /bin/bash -p `mkpasswd -m sha-512 usbarmory` -m usbarmory
 
-sudo cp -avr badusb-scripts/* ${TARGET_MNT}/home/usbarmory
-sudo mkdir ${TARGET_MNT}/home/usbarmory/SniffedFiles
-sudo mkdir ${TARGET_MNT}/home/usbarmory/SniffedFiles/sslsplit
-sudo mkdir ${TARGET_MNT}/home/usbarmory/SniffedFiles/sslsplit/logdir
-sudo mkdir ${TARGET_MNT}/home/usbarmory/certificate
-sudo cp -avr certificate/* ${TARGET_MNT}/home/usbarmory/certificate
+cp -avr badusb-scripts/* ${TARGET_MNT}/home/usbarmory
+mkdir ${TARGET_MNT}/home/usbarmory/SniffedFiles
+mkdir ${TARGET_MNT}/home/usbarmory/SniffedFiles/sslsplit
+mkdir ${TARGET_MNT}/home/usbarmory/SniffedFiles/sslsplit/logdir
+mkdir ${TARGET_MNT}/home/usbarmory/certificate
+cp -avr certificate/* ${TARGET_MNT}/home/usbarmory/certificate
 
 #install sniff-applications
 echo "-------------------------------"
