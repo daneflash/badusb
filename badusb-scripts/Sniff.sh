@@ -67,7 +67,7 @@ fi
 
 
 # Certificate
-if [ "$cert" -eq 1 && "$sniffprog" -eq 2 ]; then
+if [ "$cert" -eq 1 ] && [ "$sniffprog" -eq 2 ]; then
 
 	sleep 8
 	$p2p "\\\"\c\at\\\"" $lang
