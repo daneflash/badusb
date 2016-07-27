@@ -68,11 +68,11 @@ echo "-------------------------------"
 echo "ledtrig_heartbeat" | sudo tee -a ${TARGET_MNT}/etc/modules
 echo "ci_hdrc_imx" | sudo tee -a ${TARGET_MNT}/etc/modules
 
-echo "g_multi" | sudo tee -a ${TARGET_MNT}/etc/modules
-echo "options g_multi file=/root/backing_file dev_addr=1a:55:89:a2:69:41 host_addr=1a:55:89:a2:69:42" | sudo tee -a ${TARGET_MNT}/etc/modprobe.d/usbarmory.conf
+#echo "g_multi" | sudo tee -a ${TARGET_MNT}/etc/modules
+#echo "options g_multi file=/root/backing_file dev_addr=1a:55:89:a2:69:41 host_addr=1a:55:89:a2:69:42" | sudo tee -a ${TARGET_MNT}/etc/modprobe.d/usbarmory.conf
 
-#echo "g_ether" | sudo tee -a ${TARGET_MNT}/etc/modules
-#echo "options g_ether use_eem=0 dev_addr=1a:55:89:a2:69:41 host_addr=1a:55:89:a2:69:42" | sudo tee -a ${TARGET_MNT}/etc/modprobe.d/usbarmory.conf
+echo "g_ether" | sudo tee -a ${TARGET_MNT}/etc/modules
+echo "options g_ether use_eem=0 dev_addr=1a:55:89:a2:69:41 host_addr=1a:55:89:a2:69:42" | sudo tee -a ${TARGET_MNT}/etc/modprobe.d/usbarmory.conf
 
 #network configuration
 echo -e 'allow-hotplug usb0\niface usb0 inet static\n  address 10.0.0.1\n  netmask 255.255.255.0\n  gateway 10.0.0.2'| sudo tee -a ${TARGET_MNT}/etc/network/interfaces
@@ -89,16 +89,16 @@ exec /sbin/getty -l 115200 ttyGS0 vt102
 " | sudo tee -a ${TARGET_MNT}/etc/init/ttyGS0.conf
 
 #mass storage configuration
-sudo dd bs=1M count=64 if=/dev/zero of=${TARGET_MNT}/root/backing_file
+#sudo dd bs=1M count=64 if=/dev/zero of=${TARGET_MNT}/root/backing_file
 
-sudo parted ${TARGET_MNT}/root/backing_file --script mktable msdos
-sudo parted ${TARGET_MNT}/root/backing_file --script mkpart primary fat32 1 100%
+#sudo parted ${TARGET_MNT}/root/backing_file --script mktable msdos
+#sudo parted ${TARGET_MNT}/root/backing_file --script mkpart primary fat32 1 100%
 
 #offset in backing file in bytes for -o option
-LOOPER_DEV=`sudo losetup -f`
-sudo losetup -o 1048576 ${LOOPER_DEV} ${TARGET_MNT}/root/backing_file
-sudo mkfs.vfat -F 32 ${LOOPER_DEV}
-sudo losetup -d ${LOOPER_DEV}
+#LOOPER_DEV=`sudo losetup -f`
+#sudo losetup -o 1048576 ${LOOPER_DEV} ${TARGET_MNT}/root/backing_file
+#sudo mkfs.vfat -F 32 ${LOOPER_DEV}
+#sudo losetup -d ${LOOPER_DEV}
 
 
 #create user (usbarmory:usbarmory)

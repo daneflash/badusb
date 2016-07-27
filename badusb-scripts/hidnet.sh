@@ -4,7 +4,7 @@
 # Collin Mulliner <collin AT mulliner.org>
 #
 
-modprobe -r g_multi usb_f_ecm u_ether
+modprobe -r g_ether usb_f_ecm u_ether
 modprobe usb_f_hid
 modprobe usb_f_ecm
 
