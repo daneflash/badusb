@@ -66,7 +66,7 @@ $p2p "setxkbmap us\\n" $lang
 sleep $delay
 $p2p "export device=\$(ls /sys/class/net | grep -E 'enx')\\n"
 sleep $delay
-$p2p "if [[ -z \"\$device\" ]]; export device=\$(ls /sys/class/net | grep -E 'usb'); fi\\n"
+$p2p "if [[ -z \"\$device\" ]]; then export device=\$(ls /sys/class/net | grep -E 'usb'); fi\\n"
 sleep $delay
 $p2p "export hostdev=\$(ip route get 8.8.8.8 | awk '/dev/ {f=NR} f&&NR-1==f' RS=\" \")\\n"
 sleep $delay
