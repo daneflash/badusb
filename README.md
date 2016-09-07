@@ -1,8 +1,5 @@
 # BadUSB - Intercept TCP traffic via USB Armory
 
-## Additional information
-This work is done for my Masterthesis (German version can be found in this repo).
-
 ## Installation
 Start "createBadUSB.sh" to create a BadUSB-Image on SD-Card for USB Armory
 
